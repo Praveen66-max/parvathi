@@ -1,0 +1,39 @@
+package FirstSeleniumm;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class F7 {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		WebDriver driver=new ChromeDriver();
+		int j=0;
+		String[] iteamAdded= {"Beans","Brinjal"};
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+		List<WebElement>products=driver.findElements(By.cssSelector("div h4"));
+		System.out.println(driver.findElements(By.cssSelector("div h4")).size());
+		Thread.sleep(2000);
+		for(int i=0;i<products.size();i++)
+		{
+			List<String> listNeeded = Arrays.asList(iteamAdded);
+			String[] name=products.get(i).getText().split("-");	
+			String iteams=name[0].trim();
+			if(listNeeded.contains(iteams)) 
+			{
+				j++;
+				driver.findElements(By.xpath("//div[@class='product-action']/button")).get(i).click();
+				if(j==3)
+				break;
+			
+			}
+		}
+
+	}
+
+}
